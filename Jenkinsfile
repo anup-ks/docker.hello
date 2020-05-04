@@ -3,10 +3,15 @@ pipeline {
     
     stages {
     
-        stage('compile') {
+        stage('compile stage') {
         
         	steps {
-	     		sh 'echo "Hello"'       
+	     		withMvn(maven : "M3_3.6.3") {
+	     			
+	     			sh 'mvn clean compile'
+	     			                    
+	     		}
+
         	}
 
         }

@@ -1,10 +1,14 @@
 pipeline {
-    agen any
+    agent any
     
     stages {
     
         stage('compile') {
-     		sh 'echo "Hello"'       
+        
+        	steps {
+	     		sh 'echo "Hello"'       
+        	}
+
         }
 
     }

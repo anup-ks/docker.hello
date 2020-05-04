@@ -34,8 +34,8 @@ pipeline {
 		
 		stage('push docker image') {
 			steps {
-				withCredentials([string(credentialsId: 'id-dockerhub-pwd', variable: 'dockerhub-pwd')]) {
-				    sh "docker login -u anupks -p ${dockerhub-pwd}"
+				withCredentials([string(credentialsId: 'id-dockerhub-pwd', variable: 'dockerhubPwd')]) {
+				    sh "docker login -u anupks -p ${dockerhubPwd}"
 				}
 				sh 'docker push anupks/docker-spring-boot:1.0'
 			}

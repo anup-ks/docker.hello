@@ -1,19 +1,13 @@
 pipeline {
     agent any
     
-    stages {
-    
-        stage('compile stage') {
-        
+    stages {    
+        stage('compile stage') {        
         	steps {
-	     		withMaven(maven : "M3") {
-	     			
-	     			sh 'mvn clean compile'
-	     			                    
+	     		withMaven(maven : "M3") {	     			
+	     			sh 'mvn clean compile'	     			                    
 	     		}
-
         	}
-
         }
         
         stage('test stage') {
@@ -22,7 +16,6 @@ pipeline {
 					sh 'mvn test'
 				}
 			}
-
         }
         
         stage('package stage') {
@@ -31,11 +24,12 @@ pipeline {
 	        		sh 'mvn package'
 				}
         	}
-
-
         }
 
-
+		stage('setup image') {
+			steps {
+			    sh 'docker build -t docker-spring-boot .'
+			}	
+		}
     }
-
 }

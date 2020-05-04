@@ -26,10 +26,19 @@ pipeline {
         	}
         }
 
-		stage('setup image') {
+		stage('setup docker image') {
 			steps {
-			    sh 'docker build -t docker-spring-boot .'
+			    sh 'docker build -t anupks/docker-spring-boot:1.0 .'
 			}	
+		}
+		
+		stage('push docker image') {
+			steps {
+				withCredentials([string(credentialsId: 'id-dockerhub-pwd', variable: 'docker-hub-pwd')]) {
+				    sh "docker login -u anupks -p ${docker-hub-pwd}"
+				}
+				sh 'docker push anupks/docker-spring-boot:1.0'
+			}
 		}
     }
 }

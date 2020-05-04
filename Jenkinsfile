@@ -40,5 +40,10 @@ pipeline {
 				sh 'docker push anupks/docker-spring-boot:1.0'
 			}
 		}
+		stage('run docker container') {
+			steps {
+				sh 'docker run --rm -p 9090:9090 --name docker-spring-book-i -d anupks/docker-spring-boot:1.0'			    
+			}	          
+	    }
     }
 }

@@ -15,6 +15,20 @@ pipeline {
         	}
 
         }
+        
+        stage('test stage') {
+			withMaven(maven : "M3") {
+				sh 'mvn test'
+			}
+        }
+        
+        stage('package stage') {
+        	withMaven(maven : "M3") {
+        		sh 'mvn package'
+			}
+
+        }
+
 
     }
 
